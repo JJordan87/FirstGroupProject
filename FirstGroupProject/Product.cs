@@ -24,11 +24,11 @@ namespace FirstGroupProject
 
         public override string ToString()
         {
-            return $"Name: {Name} Price: {Price}";
+            return $"{Name} \t{Price}";
         }
         public string ToDisplayString()
         {
-            return $"Name: {Name}, Description: {Description}, Category: {Category}, Price: {Price}";
+            return $"{Name} ${Price} Category: {Category} Description: {Description}.";
         }
     }
 }

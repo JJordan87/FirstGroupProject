@@ -21,7 +21,7 @@ namespace FirstGroupProject
             new Product("GOAT Gamer Memberhsip", "Annual subscription to our exclusive gaming club membership", "Subscription", 14.99m),
             new Product("T-Shirt", "Basic t-shirts containing our brand name and logo", "Apparel", 19.99m),
             new Product("Gamer Guarantee Warranty", "Tech protection for one year on any console or video game purchased", "Warranty", 99.99m),
-            new Product("Super Smash Bros Ultimate", " A game that is developed by Bandai Namco and published by Nintendo.", "Video Game", 59.99m),
+            new Product("Super Smash Bros Ultimate", " A game that is developed by Bandai Namco and published by Nintendo", "Video Game", 59.99m),
         };
 
         public void ListProducts()

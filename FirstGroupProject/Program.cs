@@ -1,7 +1,7 @@
 ﻿
 using FirstGroupProject;
 using System.Text.RegularExpressions;
-
+//AcceptCard();
 bool runProgram = true;
 bool checkOut = true;
 int customerItemChoice = 0;
@@ -32,16 +32,14 @@ while (runProgram)
         checkOut = Validator.Validator.GetContinue("Would you like to add more items (y) or checkout (n)?: ");
 
     }
-    //display all chosen items in cart
     Console.WriteLine();
-    DisplayCart();
     //Calculating and displaying cart total
     customerSubtotal = cart.Sum(product => product.Price);
     Console.WriteLine();
-    Console.WriteLine($"Subtotal: {customerSubtotal}");
+    Console.WriteLine($"Subtotal: ${customerSubtotal}");
     //Displaying the grand total 
     decimal grandTotal = AddTax(customerSubtotal);
-    Console.WriteLine($"Grand total: {Math.Round(grandTotal, 2)}");
+    Console.WriteLine($"Grand total: ${Math.Round(grandTotal, 2)}");
     Console.WriteLine();
     //accepting payment from user
     Console.Write("How would you like to pay? We accept cash, credit, or check: ");
@@ -49,12 +47,23 @@ while (runProgram)
     if (paymentChoice == "cash")
     {
         decimal change = AcceptCash(grandTotal);
-        Console.WriteLine($"Your change is: {Math.Round(change, 2)}");
+        Console.WriteLine($"Your change is: ${Math.Round(change, 2)}");
     }
     else if(paymentChoice == "credit")
     {
         AcceptCard();        
     }
+    else if(paymentChoice == "check")
+    {
+        AcceptCheck();
+    }
+    //display all chosen items in cart
+    Console.WriteLine();
+    DisplayCart();
+    Console.WriteLine();
+    Console.WriteLine($"Subtotal: \t${customerSubtotal}");
+    Console.WriteLine($"Grand Total: \t${grandTotal}");
+    Console.WriteLine($"Purchase paid by {paymentChoice}.");
 
 
 
@@ -127,8 +136,38 @@ decimal AcceptCash(decimal grandTotal)
 
 void AcceptCard()
 {
+    Console.WriteLine("Please enter your credit card number. (Do not include spaces or dashes)");
     string cardNumber = Console.ReadLine();
-    ValidateCard(cardNumber);
+    bool worked = ValidateCard(cardNumber);
+    while (worked)
+    {
+        Console.Write("Please enter card's expiration date (MM/YY:");
+        string cardExpDate = Console.ReadLine();
+        
+        if (Regex.IsMatch(cardExpDate, @"^(0[1-9]|1[0-2])\/?([0-9]{2})$"))
+        {
+            break;//for testing
+            //while (true)
+            //{
+            //    Console.WriteLine("Please enter the card's CVV: ");
+            //    string cardCVV = Console.ReadLine();
+            //    if (Regex.IsMatch(cardCVV, @"^[0-9]{3, 4}$"))//TODO: Regex Not right for CVV
+            //    {
+            //        Console.WriteLine("Thank you for your purchase.");
+            //        worked = false;
+            //        break;
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("That is not a valid input.");
+            //    }
+            //}
+        }
+        else
+        {
+            Console.WriteLine("That is not a valid expiration date.");
+        }
+    }
 }
 
 bool ValidateCard(string cardNumber)
@@ -144,4 +183,12 @@ bool ValidateCard(string cardNumber)
     }
 }
 
-
+void AcceptCheck()
+{
+    int checkNumber = 0;
+    Console.WriteLine("Please enter the check number:");
+    while (!int.TryParse(Console.ReadLine(), out checkNumber))
+    {
+        Console.WriteLine("Not a check number. Please try again: ");
+    }
+}
