@@ -28,7 +28,7 @@ namespace FirstGroupProject
         {
             for (int i = 0; i < Products.Count; i++)
             {
-                Console.WriteLine($"{i + 1} {Products[i].ToString()}"); //TODO: needs format
+                Console.WriteLine($"{i + 1} {Products[i].ToDisplayString()}"); //TODO: needs format
             }
         }
 
