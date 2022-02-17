@@ -9,7 +9,7 @@ Console.WriteLine();
 while (runProgram)
 {
     //showing menu (should let them choose by number)
-    menu.ListProduct();
+    menu.ListProducts();
 
     Console.WriteLine();
     Console.Write("Enter a number to select an item: ");
@@ -21,7 +21,7 @@ while (runProgram)
         Console.Write("Not a valid option. Please try again: ");
     }
 
-    if (customerItemChoice >= 1 && customerItemChoice <= menu.product.Count())
+    if (customerItemChoice >= 1 && customerItemChoice <= menu.Products.Count())
     {
         Console.Write("How many would you like to purchase?: ");
 
@@ -29,28 +29,37 @@ while (runProgram)
         int itemQuantityChoice = 0;
         while (!int.TryParse(Console.ReadLine(), out itemQuantityChoice))
         {
-            Console.WriteLine("Not a valid option. Please try again: ");
+            Console.Write("Not a valid option. Please try again: ");
         }
         //display Line Total
-        Product chosenProduct = menu.product[customerItemChoice - 1];
+        Product chosenProduct = menu.Products[customerItemChoice - 1];
 
-        decimal customerLineTotal = itemQuantityChoice * chosenProduct.Price;
-
-        Console.WriteLine($"The total for that is: {customerLineTotal}"); // needs format
-
+        //TODO: get cart to not reset each loop
         List<Product> cart = new List<Product>();
-        cart.Add(chosenProduct);
+        for(int i = 0; i < itemQuantityChoice; i++)
+        {
+            cart.Add(chosenProduct);
+        }             
+                                                                                        
+        //cart.Add(chosenProduct);
         foreach (Product i in cart)
         {
-            Console.WriteLine(cart);
+            Console.WriteLine(i);
         }
-
+         
+        decimal customerLineTotal = itemQuantityChoice * chosenProduct.Price;
+        Console.WriteLine($"No Problem! That will be: {customerLineTotal}");
+        decimal customerOrderTotal = 0m;
+        //TODO: calculate customer total from cart
+        customerOrderTotal = cart.Sum(product => product.Price);
+        Console.WriteLine($"Your order total is: {customerOrderTotal}");
     }
     else
     {
         Console.WriteLine("Sorry that was not a valid input");
     }
     runProgram = Validator.Validator.GetContinue("Would you like to continue? y/n: ");
+    Console.WriteLine();
 }
 
 //methods

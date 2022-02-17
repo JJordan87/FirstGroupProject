@@ -14,7 +14,7 @@ namespace Validator
 
             while (true)
             {
-                Console.WriteLine("Would you like to continue? y/n");
+                Console.Write("Would you like to continue? y/n");
                 string choice = Console.ReadLine();
                 if (choice.ToLower().Trim() == "y")
                 {
@@ -43,7 +43,7 @@ namespace Validator
 
             while (true)
             {
-                Console.WriteLine(message);
+                Console.Write(message);
                 string choice = Console.ReadLine();
                 if (choice.ToLower().Trim() == "y")
                 {

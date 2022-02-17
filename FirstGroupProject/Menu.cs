@@ -8,7 +8,7 @@ namespace FirstGroupProject
 {
     internal class Menu 
     {
-        public List<Product> product = new List<Product>()
+        public List<Product> Products = new List<Product>()
         {
             new Product("Xbox series x", "Microsoft 's newest Xbox model", "Console", 499.99m),
             new Product("Playstation 5", "Sony's newest Playstation model", "Console", 499.99m),
@@ -24,16 +24,11 @@ namespace FirstGroupProject
             new Product("Super Smash Bros Ultimate", " A game that is developed by Bandai Namco and published by Nintendo.", "Video Game", 59.99m),
         };
 
-        internal void ListProduct(object name)
+        public void ListProducts()
         {
-            throw new NotImplementedException();
-        }
-
-        public void ListProduct()
-        {
-            for (int i = 0; i < product.Count; i++)
+            for (int i = 0; i < Products.Count; i++)
             {
-                Console.WriteLine($"{i + 1} {product[i].ToString()}");//need to format eventually
+                Console.WriteLine($"{i + 1} {Products[i].ToString()}"); //TODO: needs format
             }
         }
 
