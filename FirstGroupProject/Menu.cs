@@ -10,7 +10,7 @@ namespace FirstGroupProject
     {
         public List<Product> product = new List<Product>()
         {
-            new Product("xbox series x", "Microsoft 's newest Xbox model", "Console", 499.99m),
+            new Product("Xbox series x", "Microsoft 's newest Xbox model", "Console", 499.99m),
             new Product("Playstation 5", "Sony's newest Playstation model", "Console", 499.99m),
             new Product("Nintendo Switch OLED", "Nintendo 's newest Switch model", "Console", 499.99m),
             new Product("Xbox Controller", "Controller used for the Xbox one and Xbox Series X", "Accessory", 59.99m),
@@ -22,7 +22,6 @@ namespace FirstGroupProject
             new Product("T-Shirt", "Basic t-shirts containing our brand name and logo", "Apparel", 19.99m),
             new Product("Gamer Guarantee Warranty", "Tech protection for one year on any console or video game purchased", "Warranty", 99.99m),
             new Product("Super Smash Bros Ultimate", " A game that is developed by Bandai Namco and published by Nintendo.", "Video Game", 59.99m),
-
         };
 
         internal void ListProduct(object name)

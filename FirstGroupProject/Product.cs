@@ -22,10 +22,9 @@ namespace FirstGroupProject
             Price = _price;
         }
 
-
         public override string ToString()
         {
-            return $"{Name} {Description} {Category} {Price}";
+            return $"Name: {Name}, Description: {Description}, Category: {Category}, Price: {Price}";
         }
     }
 }
