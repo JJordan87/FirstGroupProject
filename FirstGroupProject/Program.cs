@@ -17,6 +17,9 @@ while (runProgram)
     while (checkOut)
     {
         //showing menu (should let them choose by number)
+        Console.WriteLine("#  " + String.Format("{0,-25}{1,-8}{2,-15}{3,-30}", "Name: ", "Price: ", "Category: ", "Description: "));
+        Console.WriteLine();
+
         menu.ListProducts();
         ChooseItem();
         if (customerItemChoice >= 1 && customerItemChoice <= menu.Products.Count())
@@ -49,11 +52,11 @@ while (runProgram)
         decimal change = AcceptCash(grandTotal);
         Console.WriteLine($"Your change is: ${Math.Round(change, 2)}");
     }
-    else if(paymentChoice == "credit")
+    else if (paymentChoice == "credit")
     {
-        AcceptCard();        
+        AcceptCard();
     }
-    else if(paymentChoice == "check")
+    else if (paymentChoice == "check")
     {
         AcceptCheck();
     }
@@ -64,11 +67,9 @@ while (runProgram)
     Console.WriteLine($"Subtotal: \t${customerSubtotal}");
     Console.WriteLine($"Grand Total: \t${grandTotal}");
     Console.WriteLine($"Purchase paid by {paymentChoice}.");
-
-
-
-    runProgram = Validator.Validator.GetContinue("Would you like to continue? y/n: "); //TODO: fix loop to rerun program & not just keep showing total
+    runProgram = Validator.Validator.GetContinue("Would you like to start a new cart? y/n: "); //TODO: fix loop to rerun program & not just keep showing total
     Console.WriteLine();
+
 }
 
 //methods
@@ -110,7 +111,7 @@ void AddToCart()
         cart.Add(chosenProduct);
     }
     decimal customerLineTotal = itemQuantityChoice * chosenProduct.Price;
-    Console.WriteLine($"{customerLineTotal} will be added to your cart.");
+    Console.WriteLine($"${customerLineTotal} will be added to your cart.");
 }
 
 decimal AddTax(decimal subtotal)
@@ -143,7 +144,7 @@ void AcceptCard()
     {
         Console.Write("Please enter card's expiration date (MM/YY:");
         string cardExpDate = Console.ReadLine();
-        
+
         if (Regex.IsMatch(cardExpDate, @"^(0[1-9]|1[0-2])\/?([0-9]{2})$"))
         {
             break;//for testing
@@ -192,3 +193,5 @@ void AcceptCheck()
         Console.WriteLine("Not a check number. Please try again: ");
     }
 }
+
+

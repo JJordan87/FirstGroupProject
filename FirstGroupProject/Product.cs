@@ -28,7 +28,7 @@ namespace FirstGroupProject
         }
         public string ToDisplayString()
         {
-            return $"{Name} ${Price} Category: {Category} Description: {Description}.";
+            return String.Format("{0,-25}{1,-8}{2,-15}{3,-30}", Name, "$" + Price, Category, Description + ".");
         }
     }
 }
