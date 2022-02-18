@@ -25,7 +25,6 @@ while (runProgram)
         Console.WriteLine("#    " + String.Format("{0,-25}{1,-10}{2,-15}{3,-30}", "Name: ", "Price: ", "Category: ", "Description: "));
         menu.ListProducts();
         ChooseItem();
-        customerSubtotal = cart.Sum(product => product.Price);
         if (customerItemChoice >= 1 && customerItemChoice <= menu.Products.Count())
         {
             ChooseQuantity();
@@ -37,6 +36,7 @@ while (runProgram)
             Console.WriteLine("Sorry that was not a valid input.");
         }
         Console.WriteLine();
+        customerSubtotal = cart.Sum(product => product.Price);
         checkOut = Validator.Validator.GetContinue("Would you like to return to the menu? (y) or checkout (n)?: ");
     }
     //Calculating and displaying cart total
@@ -90,8 +90,17 @@ int ChooseItem()
 {
     Console.WriteLine();
     Console.Write("Enter a number to select an item: ");
+    
     while (!int.TryParse(Console.ReadLine(), out customerItemChoice))
     {
+        if (customerItemChoice > 0 && customerItemChoice < 13)
+        {
+            
+        }
+        else
+        {
+            
+        }
         Console.Write("Not a valid option. Please try again: ");
     }
     return customerItemChoice;
