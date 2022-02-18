@@ -7,11 +7,12 @@ bool checkOut = true;
 int customerItemChoice = 0;
 int itemQuantityChoice = 0;
 decimal customerSubtotal = 0m;
+string paymentChoice = "";
 Menu menu = new Menu();
 Cashier newCashier = new Cashier();
-newCashier.AcceptCard();
 List<Product> cart = new List<Product>();
-
+//menu.CreateProductFile(); - To create the text file intitially
+menu.ReadTextFile();
 while (runProgram)
 {
     //reset cart
@@ -24,16 +25,20 @@ while (runProgram)
         //showing menu (should let them choose by number)
         Console.WriteLine("#    " + String.Format("{0,-25}{1,-10}{2,-15}{3,-30}", "Name: ", "Price: ", "Category: ", "Description: "));
         menu.ListProducts();
-        ChooseItem();
-        if (customerItemChoice >= 1 && customerItemChoice <= menu.Products.Count())
+        while (true)
         {
-            ChooseQuantity();
-            //Adds to cart & displays Line Total
-            AddToCart();
-        }
-        else
-        {
-            Console.WriteLine("Sorry that was not a valid input.");
+            ChooseItem();
+            if (customerItemChoice >= 1 && customerItemChoice <= menu.Products.Count())
+            {
+                ChooseQuantity();
+                //Adds to cart & displays Line Total
+                AddToCart();
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Sorry that was not a valid input.");
+            }
         }
         Console.WriteLine();
         checkOut = Validator.Validator.GetContinue("Would you like to add more items (y) or checkout (n)?: ");
@@ -48,24 +53,30 @@ while (runProgram)
     Console.WriteLine();
 
     //accepting payment from user
-    Console.Write("How would you like to pay? We accept cash, credit, or check: ");
-    string paymentChoice = Console.ReadLine().ToLower().Trim();
-    if (paymentChoice == "cash")
+    while (true)
     {
-        decimal change = newCashier.AcceptCash(grandTotal);
-        Console.WriteLine($"Your change is: ${Math.Round(change, 2)}");
-    }
-    else if (paymentChoice == "credit")
-    {
-        newCashier.AcceptCard();
-    }
-    else if (paymentChoice == "check")
-    {
-        newCashier.AcceptCheck();
-    }
-    else
-    {
-        Console.WriteLine("Not a valid input.");
+        Console.Write("How would you like to pay? We accept cash, credit, or check: ");
+        paymentChoice = Console.ReadLine().ToLower().Trim();
+        if (paymentChoice == "cash")
+        {
+            decimal change = newCashier.AcceptCash(grandTotal);
+            Console.WriteLine($"Your change is: ${Math.Round(change, 2)}");
+            break;
+        }
+        else if (paymentChoice == "credit")
+        {
+            newCashier.AcceptCard();
+            break;
+        }
+        else if (paymentChoice == "check")
+        {
+            newCashier.AcceptCheck();
+            break;
+        }
+        else
+        {
+            Console.WriteLine("Not a valid input.");
+        }
     }
     //display all chosen items in cart
     Console.WriteLine();
@@ -81,7 +92,9 @@ while (runProgram)
     Console.WriteLine();
     runProgram = Validator.Validator.GetContinue("Would you like to start a new cart? y/n: "); //TODO: fix loop to rerun program & not just keep showing total
 }
+//menu.Products.Add(new Product("Used GOT", "video game", "game", 25.00m));
 
+menu.UpdateProductFile();
 
 //methods
 

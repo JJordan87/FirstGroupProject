@@ -10,18 +10,6 @@ namespace FirstGroupProject
     {
         public List<Product> Products = new List<Product>()
         {
-            new Product("Xbox series x", "Microsoft 's newest Xbox model", "Console", 499.99m),
-            new Product("Playstation 5", "Sony's newest Playstation model", "Console", 499.99m),
-            new Product("Nintendo Switch OLED", "Nintendo 's newest Switch model", "Console", 499.99m),
-            new Product("Xbox Controller", "Controller used for the Xbox one and Xbox Series X", "Accessory", 59.99m),
-            new Product("Playstation Controller", "Controller used for the Playstation 5", "Accessory", 69.99m),
-            new Product("Switch Joycon Pair", "Controller used for the Nintendo Switch", "Accessory", 79.99m),
-            new Product("Sea of Thieves", "A game that is developed by Rare, and published by Microsoft", "Video Game", 59.99m),
-            new Product("Ghost of Tsushima", "A game that is developed by Sucker Punch, and published by Sony", "Video Game", 59.99m),
-            new Product("Super Smash Bros", "A game that is developed by Bandai Namco, and published by Nintendo", "Video Game", 59.99m),
-            new Product("GOAT Gamer Memberhsip", "Annual subscription to our exclusive gaming club membership", "Subscription", 14.99m),
-            new Product("T-Shirt", "Basic t-shirts containing our brand name and logo", "Apparel", 19.99m),
-            new Product("Gamer Guarantee Warranty", "Tech protection for one year on any console or video game purchased", "Warranty", 99.99m),
         };
 
         public void ListProducts()
@@ -39,6 +27,92 @@ namespace FirstGroupProject
             }
         }
 
+        public void CreateProductFile()
+        {
+             List<Product> pods = new List<Product>()
+             {
+                new Product("Xbox series x", "Microsoft 's newest Xbox model", "Console", 499.99m),
+                new Product("Playstation 5", "Sony's newest Playstation model", "Console", 499.99m),
+                new Product("Nintendo Switch OLED", "Nintendo 's newest Switch model", "Console", 499.99m),
+                new Product("Xbox Controller", "Controller used for the Xbox one and Xbox Series X", "Accessory", 59.99m),
+                new Product("Playstation Controller", "Controller used for the Playstation 5", "Accessory", 69.99m),
+                new Product("Switch Joycon Pair", "Controller used for the Nintendo Switch", "Accessory", 79.99m),
+                new Product("Sea of Thieves", "A game that is developed by Rare, and published by Microsoft", "Video Game", 59.99m),
+                new Product("Ghost of Tsushima", "A game that is developed by Sucker Punch, and published by Sony", "Video Game", 59.99m),
+                new Product("Super Smash Bros", "A game that is developed by Bandai Namco, and published by Nintendo", "Video Game", 59.99m),
+                new Product("GOAT Gamer Memberhsip", "Annual subscription to our exclusive gaming club membership", "Subscription", 14.99m),
+                new Product("T-Shirt", "Basic t-shirts containing our brand name and logo", "Apparel", 19.99m),
+                new Product("Gamer Guarantee Warranty", "Tech protection for one year on any console or video game purchased", "Warranty", 99.99m),
+             };
 
+            string productFilePath = "../../../Products.txt";
+            if (File.Exists(productFilePath) == false)
+            {
+                StreamWriter tempProductwriter = new StreamWriter(productFilePath);
+
+                foreach (Product p in pods)
+                {
+                    tempProductwriter.WriteLine($"{p.Name}/{p.Description}/{p.Category}/{p.Price}");
+                }
+                tempProductwriter.Close();
+            }
+        }
+
+        public void ReadTextFile()
+        {
+            string productFilePath = "../../../Products.txt";
+            StreamReader ProductReader = new StreamReader(productFilePath);
+            while (true)
+            {
+                string Line = ProductReader.ReadLine();
+                if (Line == null)
+                {
+                    break;
+                }
+                else
+                {
+                    string[] properties = Line.Split("/");
+                    string name = properties[0];
+                    string description = properties[1];
+                    string category = properties[2];
+                    decimal price = decimal.Parse(properties[3]);
+                    Products.Add(new Product(name, description, category, price));
+                }
+            }
+            ProductReader.Close();
+
+        }
+
+        public void UpdateProductFile()
+        {
+            string productFilePath = "../../../Products.txt";
+
+            StreamWriter tempProductwriter = new StreamWriter(productFilePath);
+
+            foreach (Product p in Products)
+            {
+                tempProductwriter.WriteLine($"{p.Name}/{p.Description}/{p.Category}/{p.Price}");
+            }
+            tempProductwriter.Close();
+        }
     }
 }
+
+//while (true)
+//{
+//    string Line = ClassReader.ReadLine();
+//    if (Line == null)
+//    {
+//        break;
+//    }
+//    else
+//    {
+//        //Console.WriteLine(Line);
+//        string[] values = Line.Split("/");
+//        string name = values[0];
+//        int age = int.Parse(values[1]);
+//        int grade = int.Parse(values[2]);
+//        Student newStudent = new Student(name, age, grade);
+//        Classroom.Add(newStudent);
+//    }
+//}
