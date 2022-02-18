@@ -9,14 +9,14 @@ int itemQuantityChoice = 0;
 decimal customerSubtotal = 0m;
 Menu menu = new Menu();
 Cashier newCashier = new Cashier();
-newCashier.AcceptCard();
 List<Product> cart = new List<Product>();
 
 while (runProgram)
 {
     //reset cart
     cart.Clear();
-    //Console.Clear();
+    Console.Clear();
+    //intro message
     Console.WriteLine("Welcome to Lucas & Jon's game shop!");
     Console.WriteLine();
     while (checkOut)
@@ -25,6 +25,7 @@ while (runProgram)
         Console.WriteLine("#    " + String.Format("{0,-25}{1,-10}{2,-15}{3,-30}", "Name: ", "Price: ", "Category: ", "Description: "));
         menu.ListProducts();
         ChooseItem();
+        customerSubtotal = cart.Sum(product => product.Price);
         if (customerItemChoice >= 1 && customerItemChoice <= menu.Products.Count())
         {
             ChooseQuantity();
@@ -36,10 +37,10 @@ while (runProgram)
             Console.WriteLine("Sorry that was not a valid input.");
         }
         Console.WriteLine();
-        checkOut = Validator.Validator.GetContinue("Would you like to add more items (y) or checkout (n)?: ");
+        checkOut = Validator.Validator.GetContinue("Would you like to return to the menu? (y) or checkout (n)?: ");
     }
     //Calculating and displaying cart total
-    customerSubtotal = cart.Sum(product => product.Price);
+    //customerSubtotal = cart.Sum(product => product.Price);
     Console.WriteLine();
     Console.WriteLine($"Subtotal: ${customerSubtotal}");
     //Displaying the grand total 
@@ -122,7 +123,8 @@ void AddToCart()
         cart.Add(chosenProduct);
     }
     decimal customerLineTotal = itemQuantityChoice * chosenProduct.Price;
-    Console.WriteLine($"${customerLineTotal} will be added to your cart.");
+    Console.WriteLine($"Awesome! {itemQuantityChoice} {chosenProduct.Name} will be added to your cart for ${customerLineTotal}.");
+    Console.WriteLine($"Your new subtotal is {customerSubtotal}");
 }
 
 

@@ -35,7 +35,6 @@ namespace FirstGroupProject
         }
         public void AcceptCard()
         {
-
             while (true)
             {
                 Console.WriteLine("Please enter your credit card number. (Do not include spaces or dashes)");
@@ -49,23 +48,18 @@ namespace FirstGroupProject
                         Console.Write("Please enter the card's CVV: ");
                         string cardCVV = Console.ReadLine();
                         if (!Regex.IsMatch(cardCVV, @"^[0-9]{3, 4}$"))
-                        {
-                            Console.WriteLine("worked");
-                            break; //testing
+                        {                            
+                            break;
                         }
                         else
                         {
                             Console.WriteLine("That was not a valid CVV.");
                         }
-
                     }
                     else
                     {
                         Console.WriteLine("That is not a valid expiration date.");
-
                     }
-
-
                 }
                 else
                 {
