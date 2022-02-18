@@ -47,7 +47,7 @@ namespace Validator
                 string choice = Console.ReadLine();
                 if (choice.ToLower().Trim() == "y")
                 {
-                    result = true;
+                    result = true;                    
                     break;
                 }
                 else if (choice.ToLower().Trim() == "n")

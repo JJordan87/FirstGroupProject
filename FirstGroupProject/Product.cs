@@ -24,11 +24,11 @@ namespace FirstGroupProject
 
         public override string ToString()
         {
-            return $"{Name} \t{Price}";
+            return String.Format("{0,-25}{1,-8}", Name, Price);
         }
         public string ToDisplayString()
         {
-            return String.Format("{0,-25}{1,-8}{2,-15}{3,-30}", Name, "$" + Price, Category, Description + ".");
+            return String.Format("{0,-25}{1,-10}{2,-15}{3,-30}", Name, "$" + Price, Category, Description + ".");
         }
     }
 }

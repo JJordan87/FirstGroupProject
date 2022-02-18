@@ -1,25 +1,26 @@
 ﻿
 using FirstGroupProject;
 using System.Text.RegularExpressions;
-//AcceptCard();
+AcceptCard();
 bool runProgram = true;
 bool checkOut = true;
 int customerItemChoice = 0;
 int itemQuantityChoice = 0;
 decimal customerSubtotal = 0m;
-decimal salesTax = 0;
 Menu menu = new Menu();
 List<Product> cart = new List<Product>();
-Console.WriteLine("Welcome to Lucas & Jon's game shop!");
-Console.WriteLine();
+
 while (runProgram)
 {
+    //reset cart
+    cart.Clear();
+    Console.Clear();
+    Console.WriteLine("Welcome to Lucas & Jon's game shop!");
+    Console.WriteLine();
     while (checkOut)
     {
         //showing menu (should let them choose by number)
-        Console.WriteLine("#  " + String.Format("{0,-25}{1,-8}{2,-15}{3,-30}", "Name: ", "Price: ", "Category: ", "Description: "));
-        Console.WriteLine();
-
+        Console.WriteLine("#    " + String.Format("{0,-25}{1,-10}{2,-15}{3,-30}", "Name: ", "Price: ", "Category: ", "Description: "));
         menu.ListProducts();
         ChooseItem();
         if (customerItemChoice >= 1 && customerItemChoice <= menu.Products.Count())
@@ -32,10 +33,11 @@ while (runProgram)
         {
             Console.WriteLine("Sorry that was not a valid input.");
         }
+        Console.WriteLine();
         checkOut = Validator.Validator.GetContinue("Would you like to add more items (y) or checkout (n)?: ");
-
     }
     Console.WriteLine();
+
     //Calculating and displaying cart total
     customerSubtotal = cart.Sum(product => product.Price);
     Console.WriteLine();
@@ -60,17 +62,25 @@ while (runProgram)
     {
         AcceptCheck();
     }
+    else
+    {
+        Console.WriteLine("Not a valid input.");
+    }
     //display all chosen items in cart
     Console.WriteLine();
     DisplayCart();
+    checkOut = true;
+
+    //displaying $$ totals
     Console.WriteLine();
     Console.WriteLine($"Subtotal: \t${customerSubtotal}");
-    Console.WriteLine($"Grand Total: \t${grandTotal}");
-    Console.WriteLine($"Purchase paid by {paymentChoice}.");
-    runProgram = Validator.Validator.GetContinue("Would you like to start a new cart? y/n: "); //TODO: fix loop to rerun program & not just keep showing total
-    Console.WriteLine();
+    Console.WriteLine($"Grand Total: \t${Math.Round(grandTotal, 2)}");
+    Console.WriteLine($"Purchased by: {paymentChoice}.");
 
+    Console.WriteLine();
+    runProgram = Validator.Validator.GetContinue("Would you like to start a new cart? y/n: "); //TODO: fix loop to rerun program & not just keep showing total
 }
+
 
 //methods
 
@@ -117,7 +127,7 @@ void AddToCart()
 decimal AddTax(decimal subtotal)
 {
     decimal salesTax = customerSubtotal * 0.06m;
-    Console.WriteLine($"Tax: {Math.Round(salesTax, 2)}");
+    Console.WriteLine($"Tax: ${Math.Round(salesTax, 2)}");
     decimal grandTotal = customerSubtotal + salesTax;
     return grandTotal;
 }
@@ -177,13 +187,21 @@ bool ValidateCard(string cardNumber)
     {
         return true;
     }
+    //else if (Regex.IsMatch(cardNumber, @"^3[47][0 - 9]{13}$"))
+    //{
+    //    return true;
+    //}
+    //else if (Regex.IsMatch(cardNumber, @"^5[1-5][0-9]{14}$"))
+    //{
+    //    return true;
+    //}
     else
     {
         Console.WriteLine("That was not a valid card number.");
         return false;
     }
 }
-
+//^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$
 void AcceptCheck()
 {
     int checkNumber = 0;
