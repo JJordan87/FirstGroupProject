@@ -24,7 +24,7 @@ namespace FirstGroupProject
 
         public override string ToString()
         {
-            return String.Format("{0,-25}{1,-8}", Name, Price);
+            return String.Format("{0,-25}{1,-8}", Name, "............................  $" + Price);
         }
         public string ToDisplayString()
         {

@@ -23,14 +23,13 @@ namespace FirstGroupProject
         }
         public decimal AcceptCash(decimal grandTotal)
         {
-            Console.Write("Enter tendered cash amount: ");
             decimal tenderedCash = 0;
+            Console.Write("Enter tendered cash amount: ");
             while (!decimal.TryParse(Console.ReadLine(), out tenderedCash))
             {
                 Console.Write("Not a valid option. Please try again: ");
             }
             decimal change = tenderedCash - grandTotal;
-
             return change;
         }
         public void AcceptCard()

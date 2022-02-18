@@ -18,11 +18,11 @@ namespace FirstGroupProject
             {
                 if (i < 9)
                 {
-                    Console.WriteLine($"[{i + 1}]  {Products[i].ToDisplayString()}"); //TODO: needs format
+                    Console.WriteLine($"[{i + 1}]  {Products[i].ToDisplayString()}"); 
                 }
                 else
                 {
-                    Console.WriteLine($"[{i + 1}] {Products[i].ToDisplayString()}"); //TODO: needs format
+                    Console.WriteLine($"[{i + 1}] {Products[i].ToDisplayString()}"); 
                 }
             }
         }
