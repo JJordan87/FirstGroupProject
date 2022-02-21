@@ -1,0 +1,12 @@
+Xbox Series X/Microsoft's newest Xbox model./Console/499.99
+Playstation 5/Sony's newest Playstation model./Console/499.99
+Nintendo Switch OLED/Nintendo 's newest Switch model./Console/499.99
+Xbox Controller/Wireless controller compatible with Xbox one & Xbox Series X/Accessory/59.99
+Playstation Controller/Wireless controller comnpatible with Playstation 5/Accessory/69.99
+Switch Joycon Pair/Controller used for the Nintendo Switch/Accessory/79.99
+Sea of Thieves/A game that is developed by Rare, and published by Microsoft./Video Game/59.99
+Ghost of Tsushima/A game that is developed by Sucker Punch, and published by Sony./Video Game/59.99
+Super Smash Bros/A game that is developed by Bandai Namco, and published by Nintendo./Video Game/59.99
+GOAT Gamer Memberhsip/Annual subscription to our exclusive gaming club membership./Subscription/14.99
+T-Shirt/Basic t-shirts containing our brand name and logo./Apparel/19.99
+Gamer Guarantee Warranty/Tech protection for one year on any console or video game purchased./Warranty/99.99

@@ -66,8 +66,9 @@ while (runProgram)
             }
         }
         Console.WriteLine();
-
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
         checkOut = Validator.Validator.GetContinue("Would you like to add another item to your cart? [y] or checkout [n]?: ");
+        Console.ResetColor();
     }
     //Calculating and displaying cart total
     Console.WriteLine();
@@ -80,7 +81,9 @@ while (runProgram)
     //accepting payment from user
     while (true)
     {
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.Write("How would you like to pay? We accept cash, credit, or check: ");
+        Console.ResetColor();
         paymentChoice = Console.ReadLine().ToLower().Trim();
 
         if (paymentChoice == "cash")
@@ -136,13 +139,17 @@ while (runProgram)
     Console.WriteLine();
     Console.WriteLine();
 
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
     bool isTrading = Validator.Validator.GetContinue("Would you like to trade in a game product? [y] or [n]: ");
+    Console.ResetColor();
     if (isTrading)
     {
         menu.Products.Add(AddToMenu());
     }
     Console.WriteLine();
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
     runProgram = Validator.Validator.GetContinue("Would you like to start a new cart? [y] or [n]: ");
+    Console.ResetColor();
 }
 
 menu.UpdateProductFile();
@@ -152,7 +159,9 @@ menu.UpdateProductFile();
 int ChooseItem()
 {
     Console.WriteLine();
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
     Console.Write("Enter a number to select an item or [0] to display menu: ");
+    Console.ResetColor();
 
     while (!int.TryParse(Console.ReadLine(), out customerItemChoice))
     {
@@ -163,7 +172,9 @@ int ChooseItem()
 
 int ChooseQuantity()
 {
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
     Console.Write("How many would you like to purchase?: ");
+    Console.ResetColor();
     while (!int.TryParse(Console.ReadLine(), out itemQuantityChoice))
     {
         Console.Write("Not a valid option. Please try again: ");
@@ -191,7 +202,7 @@ void AddToCart()
     }
     decimal customerLineTotal = itemQuantityChoice * chosenProduct.Price;
     customerSubtotal = cart.Sum(product => product.Price);
-    Console.WriteLine($"Awesome! {itemQuantityChoice} {chosenProduct.Name} will be added to your cart for ${customerLineTotal}.");
+    Console.WriteLine($"Awesome! {itemQuantityChoice} {chosenProduct.Name} will be added to your cart for ${customerLineTotal}");
     Console.WriteLine($"Your new subtotal is ${customerSubtotal}");
 }
 
@@ -210,13 +221,21 @@ static string centeredString(string s, int width)
 
 static Product AddToMenu()
 {
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
     Console.Write("What is the product name?: ");
+    Console.ResetColor();
     string newName = Console.ReadLine();
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
     Console.Write("Give a description of the product: ");
+    Console.ResetColor();
     string newDescrtiption = Console.ReadLine();
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
     Console.Write("What is the products category?: ");
+    Console.ResetColor();
     string newCategory = Console.ReadLine();
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
     Console.Write("What is the price?: ");
+    Console.ResetColor();
     decimal newPrice;
     while (!decimal.TryParse(Console.ReadLine(), out newPrice))
     {

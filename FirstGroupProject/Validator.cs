@@ -40,7 +40,6 @@ namespace Validator
         public static bool GetContinue(string message)
         {
             bool result = true;
-
             while (true)
             {
                 Console.Write(message);
