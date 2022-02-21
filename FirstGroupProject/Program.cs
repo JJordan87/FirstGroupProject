@@ -11,6 +11,7 @@ int customerItemChoice = 0;
 int itemQuantityChoice = 0;
 decimal customerSubtotal = 0m;
 string paymentChoice = "";
+decimal change = 0;
 
 Menu menu = new Menu();
 Cashier newCashier = new Cashier();
@@ -23,7 +24,7 @@ while (runProgram)
     cart.Clear();
     Console.Clear();
     //intro message
-    Console.ForegroundColor = ConsoleColor.Green;
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
     Console.WriteLine("Welcome to Lucas & Jon's game shop!");
     Console.ResetColor();
     Console.WriteLine();
@@ -74,9 +75,10 @@ while (runProgram)
     {
         Console.Write("How would you like to pay? We accept cash, credit, or check: ");
         paymentChoice = Console.ReadLine().ToLower().Trim();
+        
         if (paymentChoice == "cash")
         {
-            decimal change = newCashier.AcceptCash(grandTotal);
+            change = newCashier.AcceptCash(grandTotal);
             Console.WriteLine($"Your change is: ${Math.Round(change, 2)}");
             break;
         }
@@ -99,7 +101,13 @@ while (runProgram)
     Console.WriteLine("\n");
     //start of receipt
     //header
+    Console.BackgroundColor = ConsoleColor.DarkGray;
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
+    Console.WriteLine();
     Console.WriteLine(String.Format("{0}", centeredString("Lucas & Jon's game shop!", 75)));
+    Console.ResetColor();
+    Console.BackgroundColor = ConsoleColor.DarkGray;
+    Console.ForegroundColor = ConsoleColor.Black;
     Console.WriteLine(String.Format("{0}", centeredString("1234 Gamer Ave, Grand Rapids, MI", 75)));
     Console.WriteLine();
 
@@ -110,13 +118,18 @@ while (runProgram)
     //displaying $$ totals
     Console.WriteLine("\n");
     Console.WriteLine($"Subtotal: \t${customerSubtotal}");
-    Console.WriteLine($"Grand Total: \t${Math.Round(grandTotal, 2)}"); //TODO: format
+    Console.WriteLine($"Grand Total: \t${Math.Round(grandTotal, 2)}");
     Console.WriteLine($"Purchased by: {paymentChoice}.");
+    if(paymentChoice == "cash")
+    {
+        Console.WriteLine($"Change: ${Math.Round(change, 2)}");
+    }
+    Console.ResetColor();
 
     Console.WriteLine();
     runProgram = Validator.Validator.GetContinue("Would you like to start a new cart? y/n: "); 
 }
-//menu.Products.Add(new Product("Used GOT", "video game", "game", 25.00m));
+//menu.Products.Add(new Product("Used GOT", "video game", "game", 25.00m));//example for adding product to menu
 
 menu.UpdateProductFile();
 
@@ -146,9 +159,12 @@ int ChooseQuantity()
 
 void DisplayCart()
 {
-    foreach (Product i in cart)
+    List<Product> distinctCart = cart.GroupBy(p => p.Name).Select(p => p.First()).ToList();
+
+    foreach (Product i in distinctCart)
     {
-        Console.WriteLine(i);
+        int count = cart.Where(p => p.Name == i.Name).Count();
+        Console.WriteLine($"{i} (x{count})");
     }
 }
 
@@ -162,7 +178,7 @@ void AddToCart()
     decimal customerLineTotal = itemQuantityChoice * chosenProduct.Price;
     customerSubtotal = cart.Sum(product => product.Price);
     Console.WriteLine($"Awesome! {itemQuantityChoice} {chosenProduct.Name} will be added to your cart for ${customerLineTotal}.");
-    Console.WriteLine($"Your new subtotal is {customerSubtotal}");
+    Console.WriteLine($"Your new subtotal is ${customerSubtotal}");
 }
 
 static string centeredString(string s, int width)
