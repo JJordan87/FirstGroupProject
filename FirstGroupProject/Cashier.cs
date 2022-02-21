@@ -37,7 +37,7 @@ namespace FirstGroupProject
             {
                 currentTotal -= tenderedCash;
                 givenMoney += tenderedCash;
-                Console.WriteLine($"Not enough. Still owe {currentTotal}");
+                Console.WriteLine($"That is not enough money. Your remaining balance is ${Math.Round(currentTotal, 2)}");
             }
             else
             {

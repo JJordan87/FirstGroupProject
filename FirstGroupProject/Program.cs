@@ -27,7 +27,7 @@ while (runProgram)
     Console.Clear();
     //intro message
     Console.ForegroundColor = ConsoleColor.DarkGreen;
-    Console.WriteLine("Welcome to Lucas & Jon's game shop!");
+    Console.WriteLine("Welcome to Lucas & Jon's Game Shop!");
     Console.ResetColor();
     Console.WriteLine();
     Console.WriteLine("#    " + String.Format("{0,-25}{1,-10}{2,-15}{3,-30}", "Name: ", "Price: ", "Category: ", "Description: "));
@@ -131,14 +131,13 @@ while (runProgram)
 
     Console.WriteLine();
 
-    bool isTrading = Validator.Validator.GetContinue("Would you like to trade in a game product? [y] or [n]");
+    bool isTrading = Validator.Validator.GetContinue("Would you like to trade in a game product? [y] or [n]: ");
     if (isTrading)
     {
-        menu.Products.Add(AddToList());
+        menu.Products.Add(AddToMenu());
     }
     runProgram = Validator.Validator.GetContinue("Would you like to start a new cart? [y] or [n]: ");
 }
-//menu.Products.Add(new Product("Used GOT", "video game", "game", 25.00m));//example for adding product to menu
 
 menu.UpdateProductFile();
 
@@ -147,7 +146,7 @@ menu.UpdateProductFile();
 int ChooseItem()
 {
     Console.WriteLine();
-    Console.Write("Enter a number to select an item (0 to re-display menu): ");
+    Console.Write("Enter a number to select an item or [0] to display menu: ");
 
     while (!int.TryParse(Console.ReadLine(), out customerItemChoice))
     {
@@ -203,7 +202,7 @@ static string centeredString(string s, int width)
     return new string(' ', leftPadding) + s + new string(' ', rightPadding);
 }
 
-static Product AddToList()
+static Product AddToMenu()
 {
     Console.Write("What is the product name?: ");
     string newName = Console.ReadLine();
