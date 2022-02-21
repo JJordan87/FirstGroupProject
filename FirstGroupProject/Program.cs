@@ -48,12 +48,17 @@ while (runProgram)
             }
             else if (customerItemChoice == 2)
             {
-                Console.WriteLine("Sorry this item is no longer available. Please try again on the Playstation 6!");
+                Console.WriteLine("Sorry this item is no longer available. Please be faster next time!");
             }
             else if (customerItemChoice == 0)
             {
                 Console.WriteLine("#    " + String.Format("{0,-25}{1,-10}{2,-15}{3,-30}", "Name: ", "Price: ", "Category: ", "Description: "));
                 menu.ListProducts();
+            }
+            else if(customerItemChoice == (menu.Products.Count()+1))
+            {
+                cart.Clear();
+                Console.WriteLine("Your cart has been cleared.");
             }
             else
             {
@@ -217,7 +222,7 @@ static Product AddToMenu()
     {
         Console.Write("Not a valid option. Please try again: ");
     }
-    Product newProduct = new Product(newName, newDescrtiption, newCategory, newPrice);
+    Product newProduct = new Product(newName, newDescrtiption, newCategory, (newPrice * 2));
     return newProduct;
 }
 

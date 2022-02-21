@@ -25,6 +25,7 @@ namespace FirstGroupProject
                     Console.WriteLine($"[{i + 1}] {Products[i].ToDisplayString()}"); 
                 }
             }
+            Console.WriteLine("[" + (Products.Count + 1) + "] To clear cart");
         }
 
         public void CreateProductFile()
