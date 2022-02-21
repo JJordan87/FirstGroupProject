@@ -12,6 +12,7 @@ int itemQuantityChoice = 0;
 decimal customerSubtotal = 0m;
 string paymentChoice = "";
 decimal change = 0;
+int transactionNumber = 1000;
 
 Menu menu = new Menu();
 Cashier newCashier = new Cashier();
@@ -20,6 +21,7 @@ menu.CreateProductFile(); //- To create the text file intitially
 menu.ReadTextFile();
 while (runProgram)
 {
+    transactionNumber++;
     //reset cart
     cart.Clear();
     Console.Clear();
@@ -38,7 +40,7 @@ while (runProgram)
             ChooseItem();
             if (customerItemChoice >= 1 && customerItemChoice <= menu.Products.Count() && customerItemChoice != 2)
             {
-                
+
                 ChooseQuantity();
                 //Adds to cart & displays Line Total
                 AddToCart();
@@ -60,7 +62,7 @@ while (runProgram)
         }
         Console.WriteLine();
 
-        checkOut = Validator.Validator.GetContinue("Would you like to add another item to your cart? (y) or checkout (n)?: ");
+        checkOut = Validator.Validator.GetContinue("Would you like to add another item to your cart? [y] or checkout [n]?: ");
     }
     //Calculating and displaying cart total
     Console.WriteLine();
@@ -75,7 +77,7 @@ while (runProgram)
     {
         Console.Write("How would you like to pay? We accept cash, credit, or check: ");
         paymentChoice = Console.ReadLine().ToLower().Trim();
-        
+
         if (paymentChoice == "cash")
         {
             change = newCashier.AcceptCash(grandTotal);
@@ -98,17 +100,18 @@ while (runProgram)
         }
     }
     checkOut = true;
-    Console.WriteLine("\n");
+    Console.WriteLine();
     //start of receipt
     //header
     Console.BackgroundColor = ConsoleColor.DarkGray;
-    Console.ForegroundColor = ConsoleColor.DarkGreen;
+    Console.ForegroundColor = ConsoleColor.DarkBlue;
     Console.WriteLine();
     Console.WriteLine(String.Format("{0}", centeredString("Lucas & Jon's game shop!", 75)));
     Console.ResetColor();
     Console.BackgroundColor = ConsoleColor.DarkGray;
     Console.ForegroundColor = ConsoleColor.Black;
     Console.WriteLine(String.Format("{0}", centeredString("1234 Gamer Ave, Grand Rapids, MI", 75)));
+    Console.WriteLine(String.Format("{0}", centeredString("Receipt #: " + transactionNumber, 75)));
     Console.WriteLine();
 
     //display items back to user
@@ -120,14 +123,20 @@ while (runProgram)
     Console.WriteLine($"Subtotal: \t${customerSubtotal}");
     Console.WriteLine($"Grand Total: \t${Math.Round(grandTotal, 2)}");
     Console.WriteLine($"Purchased by: {paymentChoice}.");
-    if(paymentChoice == "cash")
+    if (paymentChoice == "cash")
     {
         Console.WriteLine($"Change: ${Math.Round(change, 2)}");
     }
     Console.ResetColor();
 
     Console.WriteLine();
-    runProgram = Validator.Validator.GetContinue("Would you like to start a new cart? y/n: "); 
+
+    bool isTrading = Validator.Validator.GetContinue("Would you like to trade in a game product? [y] or [n]");
+    if (isTrading)
+    {
+        menu.Products.Add(AddToList());
+    }
+    runProgram = Validator.Validator.GetContinue("Would you like to start a new cart? [y] or [n]: ");
 }
 //menu.Products.Add(new Product("Used GOT", "video game", "game", 25.00m));//example for adding product to menu
 
@@ -139,7 +148,7 @@ int ChooseItem()
 {
     Console.WriteLine();
     Console.Write("Enter a number to select an item (0 to re-display menu): ");
-    
+
     while (!int.TryParse(Console.ReadLine(), out customerItemChoice))
     {
         Console.Write("Not a valid option. Please try again: ");
@@ -192,6 +201,24 @@ static string centeredString(string s, int width)
     int rightPadding = width - s.Length - leftPadding;
 
     return new string(' ', leftPadding) + s + new string(' ', rightPadding);
+}
+
+static Product AddToList()
+{
+    Console.Write("What is the product name?: ");
+    string newName = Console.ReadLine();
+    Console.Write("Give a description of the product: ");
+    string newDescrtiption = Console.ReadLine();
+    Console.Write("What is the products category?: ");
+    string newCategory = Console.ReadLine();
+    Console.Write("What is the price?: ");
+    decimal newPrice;
+    while (!decimal.TryParse(Console.ReadLine(), out newPrice))
+    {
+        Console.Write("Not a valid option. Please try again: ");
+    }
+    Product newProduct = new Product(newName, newDescrtiption, newCategory, newPrice);
+    return newProduct;
 }
 
 
