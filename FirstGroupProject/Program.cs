@@ -128,7 +128,7 @@ while (runProgram)
         Console.WriteLine($"Change: ${Math.Round(change, 2)}");
     }
     Console.ResetColor();
-
+    Console.WriteLine();
     Console.WriteLine();
 
     bool isTrading = Validator.Validator.GetContinue("Would you like to trade in a game product? [y] or [n]: ");
@@ -136,6 +136,7 @@ while (runProgram)
     {
         menu.Products.Add(AddToMenu());
     }
+    Console.WriteLine();
     runProgram = Validator.Validator.GetContinue("Would you like to start a new cart? [y] or [n]: ");
 }
 
